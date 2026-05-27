@@ -1,7 +1,7 @@
 export const mockUser = {
-  name: "Ruhul Ameen",
+  name: "Farhan",
   ward: "Ward 12, Rajshahi",
-  phone: "+880 1711-223344"
+  phone: "+880 172356890"
 };
 
 export const reportsData = [
