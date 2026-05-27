@@ -1,6 +1,6 @@
 export const mockUser = {
   name: "Farhan",
-  ward: "Ward 12, Rajshahi",
+  ward: " Rajshahi",
   phone: "+880 172356890"
 };
 
@@ -10,6 +10,11 @@ export const reportsData = [
   { id: "EID-RAJ-0243", type: "Blood flowing into drain", location: "Motihar", severity: "High", status: "Assigned", time: "1 hour ago", isDrain: true, anonymous: false, lat: 24.3685, lng: 88.6360 },
   { id: "EID-RAJ-0244", type: "Blocked drain", location: "Boalia", severity: "Medium", status: "Cleaned", time: "2 hours ago", isDrain: true, anonymous: true, lat: 24.3750, lng: 88.6050 },
   { id: "EID-RAJ-0245", type: "Bad smell near mosque", location: "Dhanmondi", severity: "Medium", status: "Pending", time: "3 hours ago", isDrain: false, anonymous: false, lat: 24.3650, lng: 88.5950 },
+];
+
+export const cleanupRequestsData = [
+  { id: 'CLR-1001', type: 'Animal waste on road', location: 'Talaimari', message: 'Large waste pile near mosque needs cleanup', severity: 'High', status: 'Requested', time: '35 min ago' },
+  { id: 'CLR-1002', type: 'Blocked drain', location: 'Boalia', message: 'Drain blocked by waste and skin', severity: 'Medium', status: 'Requested', time: '1 hour ago' },
 ];
 
 export const skinBuyersData = [

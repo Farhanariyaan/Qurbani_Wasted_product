@@ -13,7 +13,7 @@ const CitizenHome = ({ setCurrentScreen, reports, onDeleteReport }) => {
   return (
     <div className="pb-6">
       <Header 
-        title={`Assalamu Alaikum, ${mockUser.name.split(' ')[0]}`} 
+        title={`Hey, ${mockUser.name.split(' ')[0]}`} 
         showLocation={true} 
       />
       
@@ -39,7 +39,7 @@ const CitizenHome = ({ setCurrentScreen, reports, onDeleteReport }) => {
             title="Request Cleanup" 
             icon={Trash2} 
             colorClass="bg-white border border-gray-200 text-brand" 
-            onClick={() => setCurrentScreen('report')}
+            onClick={() => setCurrentScreen('cleanup')}
           />
           <ActionCard 
             title="Find Skin Buyer" 

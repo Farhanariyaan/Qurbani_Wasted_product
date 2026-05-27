@@ -17,11 +17,11 @@ const ProfileScreen = ({ currentRole, setCurrentRole, setCurrentScreen }) => {
       
       <div className="p-4 flex items-center bg-white border-b border-gray-100 mb-4">
         <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center text-brand font-bold text-xl mr-4 border-2 border-brand/20">
-          RA
+         F
         </div>
         <div>
-          <h2 className="text-lg font-bold text-gray-900">Ruhul Ameen</h2>
-          <p className="text-xs text-gray-500 font-medium">Ward 12, Rajshahi</p>
+          <h2 className="text-lg font-bold text-gray-900">Farhan</h2>
+          <p className="text-xs text-gray-500 font-medium"> Rajshahi</p>
           <div className="mt-1 bg-brand text-white text-[10px] px-2 py-0.5 rounded-full inline-block font-semibold tracking-wide uppercase">
             {currentRole} Mode
           </div>

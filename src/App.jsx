@@ -9,9 +9,10 @@ import ProfileScreen from './screens/ProfileScreen';
 import CoordinatorHome from './screens/CoordinatorHome';
 import VolunteerHome from './screens/VolunteerHome';
 import CleanerHome from './screens/CleanerHome';
+import CleanupRequestScreen from './screens/CleanupRequestScreen';
 import BottomNav from './components/BottomNav';
-import { reportsData as initialReports } from './data/mockData';
-import { loadReports, saveReports, deleteReportById } from './services/reportService';
+import { reportsData as initialReports, cleanupRequestsData as initialCleanupRequests } from './data/mockData';
+import { loadReports, saveReports, deleteReportById, loadCleanupRequests, saveCleanupRequests, deleteCleanupRequestById } from './services/reportService';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('splash');
@@ -20,17 +21,33 @@ function App() {
     const storedReports = loadReports();
     return storedReports.length > 0 ? storedReports : initialReports;
   });
+  const [cleanupRequests, setCleanupRequests] = useState(() => {
+    const storedCleanupRequests = loadCleanupRequests();
+    return storedCleanupRequests.length > 0 ? storedCleanupRequests : initialCleanupRequests;
+  });
 
   useEffect(() => {
     saveReports(reports);
   }, [reports]);
 
+  useEffect(() => {
+    saveCleanupRequests(cleanupRequests);
+  }, [cleanupRequests]);
+
   const addReport = (newReport) => {
     setReports((prev) => [newReport, ...prev]);
   };
 
+  const addCleanupRequest = (newRequest) => {
+    setCleanupRequests((prev) => [newRequest, ...prev]);
+  };
+
   const deleteReport = (reportId) => {
     setReports((prev) => deleteReportById(prev, reportId));
+  };
+
+  const deleteCleanupRequest = (requestId) => {
+    setCleanupRequests((prev) => deleteCleanupRequestById(prev, requestId));
   };
 
   const renderScreen = () => {
@@ -40,15 +57,17 @@ function App() {
       case 'onboarding':
         return <OnboardingScreen setCurrentScreen={setCurrentScreen} setCurrentRole={setCurrentRole} />;
       case 'home':
-        if (currentRole === 'citizen' || currentRole === 'skinBuyer') return <CitizenHome setCurrentScreen={setCurrentScreen} reports={reports} onDeleteReport={deleteReport} />;
+        if (currentRole === 'citizen' || currentRole === 'skinBuyer') return <CitizenHome setCurrentScreen={setCurrentScreen} reports={reports} cleanupRequests={cleanupRequests} onDeleteReport={deleteReport} />;
         if (currentRole === 'volunteer') return <VolunteerHome setCurrentScreen={setCurrentScreen} reports={reports} />;
         if (currentRole === 'cleaner') return <CleanerHome setCurrentScreen={setCurrentScreen} reports={reports} />;
         if (currentRole === 'coordinator') return <CoordinatorHome setCurrentScreen={setCurrentScreen} reports={reports} />;
-        return <CitizenHome setCurrentScreen={setCurrentScreen} reports={reports} onDeleteReport={deleteReport} />;
+        return <CitizenHome setCurrentScreen={setCurrentScreen} reports={reports} cleanupRequests={cleanupRequests} onDeleteReport={deleteReport} />;
+      case 'cleanup':
+        return <CleanupRequestScreen setCurrentScreen={setCurrentScreen} cleanupRequests={cleanupRequests} onAddCleanupRequest={addCleanupRequest} onDeleteCleanupRequest={deleteCleanupRequest} />;
       case 'map':
         return <MapScreen reports={reports} />;
       case 'report':
-        return <ReportScreen setCurrentScreen={setCurrentScreen} onSubmitReport={addReport} />;
+        return <ReportScreen setCurrentScreen={setCurrentScreen} onSubmitReport={addReport} onSubmitCleanupRequest={addCleanupRequest} />;
       case 'tasks':
         return <TasksScreen currentRole={currentRole} reports={reports} onDeleteReport={deleteReport} />;
       case 'profile':

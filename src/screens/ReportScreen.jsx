@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import { Camera, MapPin, CheckCircle, AlertOctagon, ChevronLeft } from 'lucide-react';
 
-const ReportScreen = ({ setCurrentScreen, onSubmitReport }) => {
+const ReportScreen = ({ setCurrentScreen, onSubmitReport, onSubmitCleanupRequest }) => {
   const [step, setStep] = useState(1);
   const [reportType, setReportType] = useState('');
   const [isSkinMisuse, setIsSkinMisuse] = useState(false);
@@ -48,6 +48,20 @@ const ReportScreen = ({ setCurrentScreen, onSubmitReport }) => {
     if (onSubmitReport) {
       onSubmitReport(newReport);
     }
+
+    if (reportType === 'waste' && onSubmitCleanupRequest) {
+      const cleanupId = `CLR-${Math.floor(1000 + Math.random() * 9000)}`;
+      onSubmitCleanupRequest({
+        id: cleanupId,
+        type: category?.label ?? 'Animal waste on road',
+        location,
+        message: description || 'Cleanup requested for reported waste',
+        severity,
+        status: 'Requested',
+        time: 'Just now',
+      });
+    }
+
     setTicketId(id);
     setStep(3);
   };
